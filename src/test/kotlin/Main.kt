@@ -1,4 +1,4 @@
 class Main {
     val x:String = "x"
-    val y:String = "yd"
+    val y:String = "ydz"
 }

@@ -12,7 +12,6 @@ on:
     branches: "master"
   pull_request:
     branches: "*"
-  label:
     types: [labeled, unlabeled]
 
 permissions:

@@ -12,7 +12,7 @@ on:
     branches: "master"
   pull_request:
     branches: "*"
-    types: [labeled, unlabeled]
+    types: [labeled]
 
 permissions:
   contents: read

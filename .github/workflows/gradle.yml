@@ -12,8 +12,8 @@ on:
     branches: "master"
   pull_request:
     branches: "*"
-    types: [labeled]
-
+    types: [labeled, synchronize, edited, reopened]
+    
 permissions:
   contents: read
 

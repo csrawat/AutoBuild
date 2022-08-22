@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   build:
-    if: contains(github.event.pull_request.labels.*.name, 'build') || github.event.push
+    if: contains(github.event.pull_request.labels.*.name, 'build') || github.event == 'push'
     runs-on: ubuntu-latest
 
     steps:

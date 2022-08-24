@@ -19,8 +19,10 @@ permissions:
 
 jobs:
   build:
+  
     name: Java CI with Gradle
-    if: contains(github.event.pull_request.labels.*.name, 'build')
+    
+    if: ${{ (contains(github.event.pull_request.labels.*.name, 'site')) || (github.event.pull_request.merged == true) }}
     runs-on: ubuntu-latest
 
     steps:

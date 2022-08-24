@@ -16,11 +16,10 @@ on:
     
 permissions:
   contents: read
-  
-echo contains(github.event.pull_request.labels.*.name, 'build')
 
 jobs:
   build:
+    name: Java CI with Gradle
     if: contains(github.event.pull_request.labels.*.name, 'build')
     runs-on: ubuntu-latest
 

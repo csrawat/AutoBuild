@@ -22,7 +22,7 @@ jobs:
   
     name: Java CI with Gradle
     
-    if: ${{ (contains(github.event.pull_request.labels.*.name, 'site')) || (github.event.pull_request.merged == true) }}
+    if: ${{ (contains(github.event.pull_request.labels.*.name, 'build')) || (github.event.pull_request.merged == true) }}
     runs-on: ubuntu-latest
 
     steps:

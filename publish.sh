@@ -1,3 +1,11 @@
+#!/bin/bash
+
+function publish() {
+        echo "build and publish"
+}
+
+modified_files=( $(git diff --name-only HEAD HEAD~1 | grep "$build.gradle") )
+
 for i in "${modified_files=[@]}"
 do
         echo "$i"

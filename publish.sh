@@ -4,7 +4,7 @@ function publish() {
         echo "build and publish"
 }
 
-modified_files=( $(git diff --name-only master master~1 | grep "$build.gradle") )
+modified_files=( $(git diff --name-only master master~1 -- | grep "$build.gradle") )
 
 for i in "${modified_files=[@]}"
 do

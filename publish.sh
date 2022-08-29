@@ -4,7 +4,7 @@ function publish() {
         echo "build and publish"
 }
 
-echo "$(pwd)"
+echo what is this?
 
 modified_files=( $(git diff-tree --no-commit-id --name-only -r $(git log --format="%H" -n 1) | grep "$build.gradle") )
 

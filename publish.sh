@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function publish() {
-        echo "build and publish"
+        echo build and publish
 }
 
 echo what is this?
@@ -10,7 +10,7 @@ modified_files=( $(git diff-tree --no-commit-id --name-only -r $(git log --forma
 
 for i in "${modified_files=[@]}"
 do
-        echo "$i"
+        echo $i
         newVersion=$(git diff $(git log --format="%H" -n 2 | tail -1) HEAD "$i" | grep "^+version" | awk '{print $2}')
         oldVersion=$(git diff $(git log --format="%H" -n 2 | tail -1) HEAD "$i" | grep "^-version" | awk '{print $2}')
         IFS='-' read -ra newVersion <<< "$newVersion"
@@ -18,8 +18,8 @@ do
         IFS='-' read -ra oldVersion <<< "$oldVersion"
         oldVersion=${oldVersion//\'}
 
-        echo "$newVersion"
-        echo "$oldVersion"
+        echo $newVersion
+        echo $oldVersion
 
         if [ -z "$newVersion" ]
         then

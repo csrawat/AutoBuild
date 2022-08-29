@@ -6,7 +6,7 @@ function publish() {
 
 echo "$(pwd)"
 
-modified_files=( $(git diff --name-only HEAD HEAD~1 -- | grep "$build.gradle") )
+modified_files=( $(git diff-tree --no-commit-id --name-only -r $(git log --format="%H" -n 1) | grep "$build.gradle") )
 
 for i in "${modified_files=[@]}"
 do

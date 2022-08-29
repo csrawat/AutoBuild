@@ -22,5 +22,4 @@ jobs:
     - name: Publish
       run: |
         chmod +x publish.sh
-        ./publish.sh
-      shell: bash
+        sh ./publish.sh

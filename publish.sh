@@ -6,7 +6,7 @@ function publish() {
 
 echo what is this?
 
-modified_files=( $(git diff-tree --no-commit-id --name-status -r $(git log --format="%H" -n 1) | grep "$build.gradle" | awk '{print $2}') )
+modified_files=( $(git diff-tree --no-commit-id --name-only -r $(git log --format="%H" -n 1) | grep "$build.gradle") )
 echo ${#modified_files[@]}
 echo $modified_files
 

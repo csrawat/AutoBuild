@@ -15,7 +15,6 @@ function publish() {
 
 modified_files=( $(git diff --name-only HEAD^ HEAD | grep "$build.gradle") )
 echo ${#modified_files[@]}
-echo $modified_files
 
 for i in "${modified_files=[@]}"
 do

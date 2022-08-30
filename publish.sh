@@ -2,6 +2,9 @@
 
 function publish() {
         echo build and publish
+        echo "Parameter #1 is $1"
+        echo "Parameter #2 is $2"
+        echo "Parameter #3 is $3"
 }
 
 modified_files=( $(git diff --name-only HEAD^ HEAD | grep "$build.gradle") )
@@ -25,6 +28,6 @@ do
         then
                 continue
         else
-                publish
+                publish "$i" "$oldVersion" "$newVersion"
         fi
 done

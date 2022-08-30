@@ -27,7 +27,7 @@ echo start
 
 for each in "${modified_files=[@]}"
 do
-        echo $each
+  echo "$each"
 #         newVersion=$(git diff HEAD^ HEAD "$each" | grep "^+version" | awk '{print $2}')
 #         oldVersion=$(git diff HEAD^ HEAD "$each" | grep "^-version" | awk '{print $2}')
 #         IFS='-' read -ra newVersion <<< "$newVersion"

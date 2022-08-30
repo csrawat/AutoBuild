@@ -15,9 +15,16 @@ function publish() {
         flag=false
         for ((i=0; i < ${#newVersion[@]}; i++ ))
         do
-          if [ "${newVersion[$i]}" -gt "${newVersion[$i]}" ]
+
+          echo "${newVersion[$i]}"
+          echo "${oldVersion[$i]}"
+
+          if [ "${newVersion[$i]}" -gt "${oldVersion[$i]}" ]
             then
               flag=true
+              break
+            else
+              continue
           fi
         done
 

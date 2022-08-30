@@ -13,7 +13,12 @@ function publish() {
         IFS='.' read -ra oldVersion <<< "$oldVersion"
 
         flag=false
-        for ((i=0; i < ${#newVersion[@]}; i++ ))
+        if [ -z "$oldVersion" ]
+          then
+            flag=true
+        fi
+
+        for ((i=0; i < ${#oldVersion[@]}; i++ ))
         do
 
           echo "${newVersion[$i]}"

@@ -27,34 +27,15 @@ do
   IFS='-' read -ra oldVersion <<< "$oldVersion"
   oldVersion=${oldVersion//\'}
 
-   echo "$newVersion"
-   echo "$oldVersion"
-  IFS='-'
-done
+  echo "$newVersion"
+  echo "$oldVersion"
 
-echo start
-
-for each in "${modified_files=[@]}"
-do
-  echo "$each"
-         newVersion=$(git diff HEAD^ HEAD "$each" | grep "^+version" | awk '{print $2}')
-         oldVersion=$(git diff HEAD^ HEAD "$each" | grep "^-version" | awk '{print $2}')
-         IFS='-' read -ra newVersion <<< "$newVersion"
-         newVersion=${newVersion//\'}
-         IFS='-' read -ra oldVersion <<< "$oldVersion"
-         oldVersion=${oldVersion//\'}
-
-         echo $newVersion
-         echo $oldVersion
-
-         if [ -z "$newVersion" ]
-         then
-                 echo skip-continue
-                 continue
-         else
-                 echo build and publish
- #                 publish "$each" "$oldVersion" "$newVersion"
-         fi
-        
-         echo if-end
+  if [ -z "$newVersion" ]
+    then
+      echo skip-continue
+      continue
+    else
+      echo build and publish
+#      publish "$each" "$oldVersion" "$newVersion"
+  fi
 done

@@ -10,6 +10,7 @@ function publish() {
         dir=${file_name%"$suffix"}
         cd $dir
         echo build and publish
+        cd ../
 
 }
 
@@ -21,25 +22,29 @@ do
   echo "$each"
 done
 
-# for i in "${modified_files=[@]}"
-# do
-#         echo $i
-#         newVersion=$(git diff HEAD^ HEAD "$i" | grep "^+version" | awk '{print $2}')
-#         oldVersion=$(git diff HEAD^ HEAD "$i" | grep "^-version" | awk '{print $2}')
-#         IFS='-' read -ra newVersion <<< "$newVersion"
-#         newVersion=${newVersion//\'}
-#         IFS='-' read -ra oldVersion <<< "$oldVersion"
-#         oldVersion=${oldVersion//\'}
+echo start
 
-#         echo $newVersion
-#         echo $oldVersion
+for i in "${modified_files=[@]}"
+do
+        echo $i
+        newVersion=$(git diff HEAD^ HEAD "$i" | grep "^+version" | awk '{print $2}')
+        oldVersion=$(git diff HEAD^ HEAD "$i" | grep "^-version" | awk '{print $2}')
+        IFS='-' read -ra newVersion <<< "$newVersion"
+        newVersion=${newVersion//\'}
+        IFS='-' read -ra oldVersion <<< "$oldVersion"
+        oldVersion=${oldVersion//\'}
 
-#         if [ -z "$newVersion" ]
-#         then
-#                 echo skip-continue
-#                 continue
-#         else
-#                 echo build and publish
-# #                 publish "$i" "$oldVersion" "$newVersion"
-#         fi
-# done
+        echo $newVersion
+        echo $oldVersion
+
+        if [ -z "$newVersion" ]
+        then
+                echo skip-continue
+                continue
+        else
+                echo build and publish
+#                 publish "$i" "$oldVersion" "$newVersion"
+        fi
+        
+        echo if-end
+done

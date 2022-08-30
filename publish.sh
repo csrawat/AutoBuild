@@ -38,14 +38,14 @@ do
         echo $newVersion
         echo $oldVersion
 
-        if [ -z "$newVersion" ]
-        then
-                echo skip-continue
-                continue
-        else
-                echo build and publish
-#                 publish "$each" "$oldVersion" "$newVersion"
-        fi
+#         if [ -z "$newVersion" ]
+#         then
+#                 echo skip-continue
+#                 continue
+#         else
+#                 echo build and publish
+# #                 publish "$each" "$oldVersion" "$newVersion"
+#         fi
         
         echo if-end
 done

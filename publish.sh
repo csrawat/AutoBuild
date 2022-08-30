@@ -34,6 +34,7 @@ do
                 echo skip-continue
                 continue
         else
-                publish "$i" "$oldVersion" "$newVersion"
+                echo build and publish
+#                 publish "$i" "$oldVersion" "$newVersion"
         fi
 done

@@ -25,11 +25,11 @@ done
 
 echo start
 
-for i in "${modified_files=[@]}"
+for each in "${modified_files=[@]}"
 do
-        echo $i
-        newVersion=$(git diff HEAD^ HEAD "$i" | grep "^+version" | awk '{print $2}')
-        oldVersion=$(git diff HEAD^ HEAD "$i" | grep "^-version" | awk '{print $2}')
+        echo $each
+        newVersion=$(git diff HEAD^ HEAD "$each" | grep "^+version" | awk '{print $2}')
+        oldVersion=$(git diff HEAD^ HEAD "$each" | grep "^-version" | awk '{print $2}')
         IFS='-' read -ra newVersion <<< "$newVersion"
         newVersion=${newVersion//\'}
         IFS='-' read -ra oldVersion <<< "$oldVersion"
@@ -44,7 +44,7 @@ do
                 continue
         else
                 echo build and publish
-#                 publish "$i" "$oldVersion" "$newVersion"
+#                 publish "$each" "$oldVersion" "$newVersion"
         fi
         
         echo if-end

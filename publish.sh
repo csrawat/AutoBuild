@@ -8,7 +8,8 @@ function publish() {
         file_name=$1
         suffix="build.gradle"
         pwd
-        cd ${file_name%"$file_name"}
+        dir=${file_name%"$file_name"}
+        cd dir
         pwd
 }
 

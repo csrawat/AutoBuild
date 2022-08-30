@@ -5,6 +5,10 @@ function publish() {
         echo "Parameter #1 is $1"
         echo "Parameter #2 is $2"
         echo "Parameter #3 is $3"
+
+        pwd
+        cd "$1"
+        pwd
 }
 
 modified_files=( $(git diff --name-only HEAD^ HEAD | grep "$build.gradle") )

@@ -9,7 +9,7 @@ function publish() {
         suffix="build.gradle"
         pwd
         ls -larth
-        dir=${file_name%"$file_name"}
+        dir=${file_name%"$suffix"}
         echo $dir
         cd $dir
         pwd

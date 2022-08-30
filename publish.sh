@@ -20,6 +20,7 @@ echo ${#modified_files[@]}
 for each in "${modified_files[@]}"
 do
   echo "$each"
+  IFS='-'
 done
 
 echo start

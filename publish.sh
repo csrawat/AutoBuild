@@ -1,18 +1,16 @@
 #!/bin/bash
 
 function publish() {
-        echo build and publish
         echo "Parameter #1 is $1"
         echo "Parameter #2 is $2"
         echo "Parameter #3 is $3"
+
         file_name=$1
         suffix="build.gradle"
-        pwd
-        ls -larth
         dir=${file_name%"$suffix"}
-        echo $dir
         cd $dir
-        pwd
+        echo build and publish
+
 }
 
 modified_files=( $(git diff --name-only HEAD^ HEAD | grep "$build.gradle") )

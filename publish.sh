@@ -31,6 +31,7 @@ do
 
         if [ -z "$newVersion" ]
         then
+                echo skip-continue
                 continue
         else
                 publish "$i" "$oldVersion" "$newVersion"

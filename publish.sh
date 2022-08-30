@@ -7,7 +7,7 @@ function publish() {
         echo "Parameter #3 is $3"
         file_name="build.gradle"
         pwd
-        cd ${$1%"$file_name"}
+        cd ${"$1"%"$file_name"}
         pwd
 }
 

@@ -6,12 +6,31 @@ function publish() {
         echo "Parameter #3 is $3"
 
         file_name=$1
-        suffix="build.gradle"
-        dir=${file_name%"$suffix"}
-        cd $dir
-        echo build and publish
-        cd ../
+        oldVersion=$2
+        newVersion=$3
 
+        IFS='.' read -ra newVersion <<< "$newVersion"
+        IFS='.' read -ra oldVersion <<< "$oldVersion"
+
+        flag=false
+        for ((i=0; i < ${#newVersion[@]}; i++ ))
+        do
+          if [ "${newVersion[$i]}" -gt "${newVersion[$i]}" ]
+            then
+              flag=true
+          fi
+        done
+
+        if [ $flag = true ]
+          then
+            suffix="build.gradle"
+            dir=${file_name%"$suffix"}
+            cd "$dir" || exit
+            echo build and publish
+            cd ../
+          else
+            echo cannot publish
+        fi
 }
 
 modified_files=( $(git diff --name-only HEAD^ HEAD | grep "$build.gradle") )

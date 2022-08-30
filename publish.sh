@@ -5,9 +5,10 @@ function publish() {
         echo "Parameter #1 is $1"
         echo "Parameter #2 is $2"
         echo "Parameter #3 is $3"
-        file_name="build.gradle"
+        file_name=$1
+        suffix="build.gradle"
         pwd
-        cd ${"$1"%"$file_name"}
+        cd ${file_name%"$file_name"}
         pwd
 }
 

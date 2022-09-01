@@ -5,26 +5,26 @@ function publish() {
         echo "Parameter #2 is $2"
         echo "Parameter #3 is $3"
 
-        file_name=$1
-        oldVersion=$2
-        newVersion=$3
+        FILE_NAME=$1
+        OLD_VERSION=$2
+        NEW_VERSION=$3
 
-        IFS='.' read -ra newVersion <<< "$newVersion"
-        IFS='.' read -ra oldVersion <<< "$oldVersion"
+        IFS='.' read -ra NEW_VERSION <<< "$NEW_VERSION"
+        IFS='.' read -ra OLD_VERSION <<< "$OLD_VERSION"
 
         flag=false
-        if [ -z "$oldVersion" ]
+        if [ -z "$OLD_VERSION" ]
           then
             flag=true
         fi
 
-        for ((i=0; i < ${#oldVersion[@]}; i++ ))
+        for ((i=0; i < ${#OLD_VERSION[@]}; i++ ))
         do
 
-          echo "${newVersion[$i]}"
-          echo "${oldVersion[$i]}"
+          echo "${NEW_VERSION[$i]}"
+          echo "${OLD_VERSION[$i]}"
 
-          if [ "${newVersion[$i]}" -gt "${oldVersion[$i]}" ]
+          if [ "${NEW_VERSION[$i]}" -gt "${OLD_VERSION[$i]}" ]
             then
               flag=true
               break
@@ -36,8 +36,9 @@ function publish() {
         if [ $flag = true ]
           then
             suffix="build.gradle"
-            dir=${file_name%"$suffix"}
+            dir=${FILE_NAME%"$suffix"}
             cd "$dir" || exit
+#            execute build command here
             echo build and publish
             cd ../
           else
@@ -45,27 +46,27 @@ function publish() {
         fi
 }
 
-modified_files=( $(git diff --name-only HEAD^ HEAD | grep "$build.gradle") )
-echo ${#modified_files[@]}
+MODIFIED_FILES=( $(git diff --name-only HEAD^ HEAD | grep "$build.gradle") )
+echo ${#MODIFIED_FILES[@]}
 
-for each in "${modified_files[@]}"
+for each in "${MODIFIED_FILES[@]}"
 do
         echo "$each"
-        newVersion=$(git diff HEAD^ HEAD "$each" | grep "^+version" | awk '{print $2}')
-        oldVersion=$(git diff HEAD^ HEAD "$each" | grep "^-version" | awk '{print $2}')
-        IFS='-' read -ra newVersion <<< "$newVersion"
-        newVersion=${newVersion//\'}
-        IFS='-' read -ra oldVersion <<< "$oldVersion"
-        oldVersion=${oldVersion//\'}
+        NEW_VERSION=$(git diff HEAD^ HEAD "$each" | grep "^+version" | awk '{print $2}')
+        OLD_VERSION=$(git diff HEAD^ HEAD "$each" | grep "^-version" | awk '{print $2}')
+        IFS='-' read -ra NEW_VERSION <<< "$NEW_VERSION"
+        NEW_VERSION=${NEW_VERSION//\'}
+        IFS='-' read -ra OLD_VERSION <<< "$OLD_VERSION"
+        OLD_VERSION=${OLD_VERSION//\'}
 
-        echo "$newVersion"
-        echo "$oldVersion"
+        echo "$NEW_VERSION"
+        echo "$OLD_VERSION"
 
-  if [ -z "$newVersion" ]
+  if [ -z "$NEW_VERSION" ]
     then
         echo skip-continue
         continue
     else
-        publish "$each" "$oldVersion" "$newVersion"
+        publish "$each" "$OLD_VERSION" "$NEW_VERSION"
   fi
 done

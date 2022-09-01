@@ -11,9 +11,6 @@ permissions:
 jobs:
   build:
     name: Java CI with Gradle
-    
-    if: contains(github.event.pull_request.labels.*.name, 'build')
-    
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -22,5 +19,11 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-    - name: Build with Gradle
+
+    - name: Build when label added
+      if: contains(github.event.pull_request.labels.*.name, 'build')
       run: ./gradlew clean build testClasses -x test
+
+    - name: Fail when label not added
+      if: contains(github.event.pull_request.labels.*.name, 'build') == false
+      run: exit 1

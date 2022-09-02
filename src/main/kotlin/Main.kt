@@ -1,5 +1,5 @@
 class Main {
-    val x:String = "xsa"
+    val x:String = "xsasa"
     val y:String = "ysdf"
-    val z:String = "zda"
+    val z:String = "zdaf"
 }

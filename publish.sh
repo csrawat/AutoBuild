@@ -41,13 +41,13 @@ function publish() {
             suffix="build.gradle"
             dir=${FILE_NAME%"$suffix"}
             cd "$dir" || exit
-#            execute build command here
             CURR_DIR=$(pwd)
             echo "$CURR_DIR"
             if [ "$ROOT_DIR" == "$CURR_DIR" ]
               then
                 echo cannot publish on root directory
               else
+#                execute build command here
                 echo build and publish
             fi
           else

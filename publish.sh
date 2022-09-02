@@ -43,6 +43,7 @@ function publish() {
             cd "$dir" || exit
 #            execute build command here
             CURR_DIR=$(pwd)
+            echo "$CURR_DIR"
             if [ "$ROOT_DIR" == "$CURR_DIR" ]
               then
                 echo cannot publish on root directory

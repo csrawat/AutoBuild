@@ -47,13 +47,14 @@ function publish() {
             if [ "$ROOT_DIR" == "$CURR_DIR" ]
               then
                 echo cannot publish on root directory
-                cd ../
               else
                 echo build and publish
             fi
           else
             echo cannot publish
         fi
+
+        cd "$ROOT_DIR" || exit
 }
 
 MODIFIED_FILES=( $(git diff --name-only HEAD^ HEAD | grep "$build.gradle") )

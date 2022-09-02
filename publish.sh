@@ -47,6 +47,8 @@ function publish() {
               then
                 echo build and publish
                 cd ../
+              else
+                echo cannot publish on root directory
             fi
           else
             echo cannot publish

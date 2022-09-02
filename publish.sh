@@ -8,6 +8,9 @@ function publish() {
         FILE_NAME=$1
         OLD_VERSION=$2
         NEW_VERSION=$3
+        ROOT_DIR=$(pwd)
+
+        echo "$ROOT_DIR"
 
         IFS='.' read -ra NEW_VERSION <<< "$NEW_VERSION"
         IFS='.' read -ra OLD_VERSION <<< "$OLD_VERSION"
@@ -39,8 +42,12 @@ function publish() {
             dir=${FILE_NAME%"$suffix"}
             cd "$dir" || exit
 #            execute build command here
-            echo build and publish
-            cd ../
+            CURR_DIR=$(pwd)
+            if [ "$ROOT_DIR" -ne "$CURR_DIR" ]
+              then
+                echo build and publish
+                cd ../
+            fi
           else
             echo cannot publish
         fi

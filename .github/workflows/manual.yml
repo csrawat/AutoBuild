@@ -5,8 +5,12 @@ on:
     # Inputs the workflow accepts.
     inputs:
       buildType:
+        type: choice
         # Friendly description to be shown in the UI instead of 'name'
         description: 'build type'
+        options:
+        - release
+        - debug
         # Default value if no value is explicitly provided
         default: 'release'
         # Input has to be provided for the workflow to run

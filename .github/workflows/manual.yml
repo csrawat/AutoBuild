@@ -1,0 +1,27 @@
+name: android app build
+
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      buildType:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'build type'
+        # Default value if no value is explicitly provided
+        default: 'release'
+        # Input has to be provided for the workflow to run
+        required: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "greet"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Runs a single command using the runners shell
+    - name: Send greeting
+      run: |
+        echo "Build type ${{ github.event.inputs.buildType }}"

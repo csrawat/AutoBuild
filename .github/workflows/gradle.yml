@@ -27,3 +27,24 @@ jobs:
     - name: Fail when label not added
       if: contains(github.event.pull_request.labels.*.name, 'build') == false
       run: exit 1
+      
+    - name: Notify slack success
+      if: success()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: build-bot
+        status: SUCCESS
+        color: good
+
+    - name: Notify slack fail
+      if: failure()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: build-bot
+        status: FAILED
+        color: danger
+

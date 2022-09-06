@@ -1,7 +1,7 @@
 name: Java CI with Gradle
 
 on:
-  pull_request_target:
+  pull_request:
     branches: "*"
     types: [labeled, synchronize, edited, reopened]
     
@@ -34,7 +34,7 @@ jobs:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
       uses: voxmedia/github-action-slack-notify-build@v1
       with:
-        channel: build-bot
+        channel: auto-build
         status: SUCCESS
         color: good
 
@@ -44,7 +44,7 @@ jobs:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
       uses: voxmedia/github-action-slack-notify-build@v1
       with:
-        channel: build-bot
+        channel: auto-build
         status: FAILED
         color: danger
 

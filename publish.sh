@@ -1,19 +1,11 @@
 #!/bin/bash
 
 function publish() {
-        echo "Parameter #1 is $1"
-        echo "Parameter #2 is $2"
-        echo "Parameter #3 is $3"
 
         FILE_NAME=$1
         OLD_VERSION=$2
         NEW_VERSION=$3
         ROOT_DIR=$(pwd)
-
-        echo "$ROOT_DIR"
-
-        IFS='.' read -ra NEW_VERSION <<< "$NEW_VERSION"
-        IFS='.' read -ra OLD_VERSION <<< "$OLD_VERSION"
 
         flag=false
         if [ -z "$OLD_VERSION" ]
@@ -21,48 +13,39 @@ function publish() {
             flag=true
         fi
 
-        for ((i=0; i < ${#OLD_VERSION[@]}; i++ ))
-        do
+        if [ ${NEW_VERSION//\./} -gt ${OLD_VERSION//\./} ]
+          then
+            flag=true
+        fi
 
-          echo "${NEW_VERSION[$i]}"
-          echo "${OLD_VERSION[$i]}"
-
-          if [ "${NEW_VERSION[$i]}" -gt "${OLD_VERSION[$i]}" ]
-            then
-              flag=true
-              break
-            else
-              continue
-          fi
-        done
+        suffix="build.gradle"
+        dir=${FILE_NAME%"$suffix"}
 
         if [ $flag = true ]
           then
-            suffix="build.gradle"
-            dir=${FILE_NAME%"$suffix"}
             cd "$dir" || exit
             CURR_DIR=$(pwd)
-            echo "$CURR_DIR"
+            echo "current directory is: [$CURR_DIR]"
             if [ "$ROOT_DIR" == "$CURR_DIR" ]
               then
-                echo cannot publish on root directory
+                echo "cannot publish on root directory"
               else
 #                execute build command here
-                echo build and publish
+                echo "Publishing new version [$NEW_VERSION] for [$dir]"
             fi
           else
-            echo cannot publish
+            echo "[$NEW_VERSION] for [$dir] cannot be published, check if it correctly updated"
         fi
 
         cd "$ROOT_DIR" || exit
 }
 
 MODIFIED_FILES=( $(git diff --name-only HEAD^ HEAD | grep "$build.gradle") )
-echo ${#MODIFIED_FILES[@]}
+echo "Total ${#MODIFIED_FILES[@]} build.gradle files are modified"
 
 for each in "${MODIFIED_FILES[@]}"
 do
-        echo "$each"
+        echo "Checking in [$each] for version upgrade"
         NEW_VERSION=$(git diff HEAD^ HEAD "$each" | grep "^+version" | awk '{print $2}')
         OLD_VERSION=$(git diff HEAD^ HEAD "$each" | grep "^-version" | awk '{print $2}')
         IFS='-' read -ra NEW_VERSION <<< "$NEW_VERSION"
@@ -70,12 +53,9 @@ do
         IFS='-' read -ra OLD_VERSION <<< "$OLD_VERSION"
         OLD_VERSION=${OLD_VERSION//\'}
 
-        echo "$NEW_VERSION"
-        echo "$OLD_VERSION"
-
   if [ -z "$NEW_VERSION" ]
     then
-        echo skip-continue
+        echo "No change found in the version of [$each]. Will not be published"
         continue
     else
         publish "$each" "$OLD_VERSION" "$NEW_VERSION"

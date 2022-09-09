@@ -42,6 +42,15 @@ function publish() {
         fi
 
         cd "$ROOT_DIR" || exit
+        
+        if [ -s $VERSION_FILE ]
+                then
+                        sed -i '1i\
+                        new modules are published:
+                        '
+                else
+                        printf "no module is published." >> $VERSION_FILE
+        fi
 }
 
 MODIFIED_FILES=( $(git diff --name-only HEAD^ HEAD | grep "$build.gradle") )

@@ -7,6 +7,7 @@ function publish() {
         NEW_VERSION=$3
         ROOT_DIR=$(pwd)
         VERSION_FILE="$ROOT_DIR/version_file"
+        touch $VERSION_FILE
 
         flag=false
         if [ -z "$OLD_VERSION" ]

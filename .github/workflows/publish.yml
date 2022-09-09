@@ -29,6 +29,7 @@ jobs:
         CHANGELOG="${CHANGELOG//'%'/'%25'}"
         CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
         CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+        echo "\n"
         echo "::set-output name=changeLog::$CHANGELOG"
       id: version
       shell: bash

@@ -35,7 +35,7 @@ function publish() {
               else
 #                execute build command here
                 echo "Publishing new version [$NEW_VERSION] for [$dir]"
-                printf "$dir\t\t$NEW_VERSION\n" >> $VERSION_FILE
+                printf "$dir\t\t\t$NEW_VERSION\n" >> $VERSION_FILE
             fi
           else
             echo "[$NEW_VERSION] for [$dir] cannot be published, check if it correctly updated"

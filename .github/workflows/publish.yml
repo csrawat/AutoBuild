@@ -36,7 +36,7 @@ jobs:
       id: slack
       uses: slackapi/slack-github-action@v1.21.0
       with:
-        channel-id: 'C041ZASDH16'
+        channel-id: 'C0418TCEH8B'
         slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.head_commit.url }}\n${{ env.MY_STRING }}"
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}

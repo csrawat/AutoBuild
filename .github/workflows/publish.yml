@@ -26,13 +26,13 @@ jobs:
         ./publish.sh
         cat version_file
         MY_STRING=$(cat version_file)
+        echo "MY_STRING<<EOF" >> $GITHUB_ENV
+        echo "$MY_STRING" >> $GITHUB_ENV
+        echo "EOF" >> $GITHUB_ENV
 #        CHANGELOG="${CHANGELOG//'%'/'%25'}"
 #        CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
 #        CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
 #        echo "::set-output name=changeLog::$CHANGELOG"
-       echo "MY_STRING<<EOF" >> $GITHUB_ENV
-       echo "$MY_STRING" >> $GITHUB_ENV
-       echo "EOF" >> $GITHUB_ENV
       id: version
       shell: bash
       

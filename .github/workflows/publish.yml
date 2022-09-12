@@ -26,9 +26,9 @@ jobs:
         ./publish.sh
         MY_STRING=$(cat version_file)
         printf "$MY_STRING\n\n\n\n"
-        echo "MY_STRING<<EOF" >> $GITHUB_ENV
-        echo "$MY_STRING" >> $GITHUB_ENV
-        echo "EOF" >> $GITHUB_ENV
+        printf "MY_STRING<<EOF" >> $GITHUB_ENV
+        printf "$MY_STRING" >> $GITHUB_ENV
+        printf "EOF" >> $GITHUB_ENV
 #        CHANGELOG="${CHANGELOG//'%'/'%25'}"
 #        CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
 #        CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"

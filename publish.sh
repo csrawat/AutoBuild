@@ -68,7 +68,7 @@ done
 
 if [ -s $VERSION_FILE ]
         then
-                sed '1 i\new modules are published:\n' $VERSION_FILE
+                sed '1 i\new modules are published:' $VERSION_FILE
         else
                 printf "no module is published." >> $VERSION_FILE
 fi

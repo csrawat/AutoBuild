@@ -25,15 +25,10 @@ jobs:
         chmod +x publish.sh
         ./publish.sh
         MY_STRING=$(cat version_file)
-        printf "$MY_STRING\n\n\n\n"
+        printf "$MY_STRING"
+        echo "MY_STRING<<EOF" >> $GITHUB_ENV
         echo "$MY_STRING" >> $GITHUB_ENV
-#        echo "MY_STRING<<EOF" >> $GITHUB_ENV
-#        echo "$MY_STRING" >> $GITHUB_ENV
-#        echo "EOF" >> $GITHUB_ENV
-#        CHANGELOG="${CHANGELOG//'%'/'%25'}"
-#        CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
-#        CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
-#        echo "::set-output name=changeLog::$CHANGELOG"
+        echo "EOF" >> $GITHUB_ENV
       id: version
       shell: bash
       
@@ -41,11 +36,7 @@ jobs:
       id: slack
       uses: slackapi/slack-github-action@v1.21.0
       with:
-        # Slack channel id, channel name, or user id to post message.
-        # See also: https://api.slack.com/methods/chat.postMessage#channels
         channel-id: 'C041ZASDH16'
-        # For posting a simple plain text message
-#        slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.head_commit.url }}\n${{ steps.version.outputs.changeLog }}"
         slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.head_commit.url }}\n${{ env.MY_STRING }}"
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}

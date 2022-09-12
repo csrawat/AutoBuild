@@ -25,6 +25,7 @@ jobs:
         chmod +x publish.sh
         ./publish.sh
         MY_STRING=$(cat version_file)
+        echo "$MY_STRING\n\n\n\n"
         echo "MY_STRING<<EOF" >> $GITHUB_ENV
         echo "$MY_STRING" >> $GITHUB_ENV
         echo "EOF" >> $GITHUB_ENV

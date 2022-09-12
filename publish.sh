@@ -3,7 +3,7 @@
 ROOT_DIR=$(pwd)
 VERSION_FILE="$ROOT_DIR/version_file"
 touch $VERSION_FILE
-printf "new modules are published:\n" > $VERSION_FILE
+printf "new modules are published:" > $VERSION_FILE
 
 function publish() {
 
@@ -36,7 +36,7 @@ function publish() {
               else
 #                execute build command here
                 echo "Publishing new version [$NEW_VERSION] for [$dir]"
-                printf "$dir\t\t\t$NEW_VERSION\n" >> $VERSION_FILE
+                printf "\n$dir\t\t\t$NEW_VERSION" >> $VERSION_FILE
             fi
           else
             echo "[$NEW_VERSION] for [$dir] cannot be published, check if it correctly updated"
@@ -67,9 +67,8 @@ do
   fi
 done
 
-if [ -s $VERSION_FILE ]
-        then
-                printf "nothing here\n"
-        else
-                printf "no module is published." > $VERSION_FILE
+NO_OF_LINES=$(wc -l < $VERSION_FILE)
+
+if [ $NO_OF_LINES -lt 2 ]
+        printf "no module is published." > $VERSION_FILE
 fi

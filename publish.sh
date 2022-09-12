@@ -70,5 +70,6 @@ done
 NO_OF_LINES=$(wc -l < $VERSION_FILE)
 
 if [ $NO_OF_LINES -lt 2 ]
+    then
         printf "no module is published." > $VERSION_FILE
 fi

@@ -31,11 +31,12 @@ jobs:
         echo "EOF" >> $GITHUB_ENV
       id: version
       shell: bash
-      
-    - name: Fail when no module is published
-      if: contains(${{ env.MY_STRING }}, 'no module is published.')
-      run: exit 1
-      
+  
+  notify:
+    name: Notify
+    if: "!contains(${{ env.MY_STRING }}, 'no module is published.')"
+    runs-on: ubuntu-latest
+    steps:
     - name: Post to a Slack channel
       id: slack
       uses: slackapi/slack-github-action@v1.21.0

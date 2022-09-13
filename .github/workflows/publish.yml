@@ -33,6 +33,7 @@ jobs:
       shell: bash
       
     - name: Post to a Slack channel
+      if: "!contains(${{ env.MY_STRING }}, 'no module is published.')"
       id: slack
       uses: slackapi/slack-github-action@v1.21.0
       with:

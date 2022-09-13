@@ -33,7 +33,7 @@ jobs:
       shell: bash
       
     - name: Fail when no module is published
-      if: "!contains(${{ env.MY_STRING }}, 'no module is published.')"
+      if: "contains(${{ env.MY_STRING }}, 'no module is published.')"
       run: exit 0
       
     - name: Post to a Slack channel

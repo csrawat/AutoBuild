@@ -34,7 +34,7 @@ jobs:
       
     - name: Fail when no module is published
       if: contains(${{ env.MY_STRING }}, 'no module is published.')
-      run: exit 0
+      run: exit 1
       
     - name: Post to a Slack channel
       id: slack

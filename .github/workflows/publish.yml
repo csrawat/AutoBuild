@@ -33,6 +33,7 @@ jobs:
       shell: bash
   
   notify:
+    needs: build
     name: Notify
     if: "!contains(${{ env.MY_STRING }}, 'no module is published.')"
     runs-on: ubuntu-latest

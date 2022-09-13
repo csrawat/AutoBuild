@@ -33,7 +33,7 @@ jobs:
   notify:
     needs: build
     name: Notify
-    if: contains(${{ needs.build.outputs.content }}, 'no module is published.')
+    if: contains(${{needs.build.outputs.content}}, 'no module is published.')
     runs-on: ubuntu-latest
     steps:
     - name: Post to a Slack channel
@@ -41,6 +41,6 @@ jobs:
       uses: slackapi/slack-github-action@v1.21.0
       with:
         channel-id: 'C0418TCEH8B'
-        slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.head_commit.url }}\n${{ needs.build.outputs.changeLog }}"
+        slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.head_commit.url }}\n${{needs.build.outputs.changeLog}}"
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}

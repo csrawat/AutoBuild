@@ -67,6 +67,8 @@ do
   fi
 done
 
+cat $VERSION_FILE
+
 NO_OF_LINES=$(wc -l < $VERSION_FILE)
 
 if [ $NO_OF_LINES -lt 2 ]

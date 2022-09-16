@@ -1,16 +1,17 @@
-name: Publish
+name: PUBLISH
 
 on:
   push:
-    branches: "master"
+    branches: [ master ]
     
 permissions:
   contents: read
-  
+
 jobs:
-  Publish:
+  build:
     name: Publish
-    runs-on: ubuntu-latest
+    
+    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v3
       with:
@@ -25,22 +26,18 @@ jobs:
         chmod +x publish.sh
         ./publish.sh
         MY_STRING=$(cat version_file)
-        MY_STRING="${MY_STRING//'%'/'%25'}"
-        MY_STRING="${MY_STRING//$'\n'/'%0A'}"
-        MY_STRING="${MY_STRING//$'\r'/'%0D'}"
-        echo "::set-output name=content::$MY_STRING"
-  
-  Notify:
-    needs: Publish
-    name: Notify
-    if: contains(${{needs.Publish.outputs.content}}, 'no module is published.')
-    runs-on: ubuntu-latest
-    steps:
+        printf "$MY_STRING"
+        echo "MY_STRING<<EOF" >> $GITHUB_ENV
+        echo "$MY_STRING" >> $GITHUB_ENV
+        echo "EOF" >> $GITHUB_ENV
+      id: version
+      shell: bash
+      
     - name: Post to a Slack channel
       id: slack
       uses: slackapi/slack-github-action@v1.21.0
       with:
         channel-id: 'C0418TCEH8B'
-        slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.head_commit.url }}\n${{needs.Publish.outputs.changeLog}}"
+        slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.head_commit.url }}\n${{ env.MY_STRING }}"
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}

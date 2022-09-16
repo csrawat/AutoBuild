@@ -68,6 +68,7 @@ do
 done
 
 cat $VERSION_FILE
+echo $(wc -l < $VERSION_FILE)
 
 NO_OF_LINES=$(wc -l < $VERSION_FILE)
 

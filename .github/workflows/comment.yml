@@ -6,9 +6,10 @@ jobs:
   add-comment:
     if: github.event.label.name == 'bors r+'
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
       - name: Add comment
         uses: thollander/actions-comment-pull-request@v2
         with:

@@ -3,7 +3,7 @@ name: Comment bors r+
 on: pull_request
 jobs:
   example_comment_pr:
-    runs-on: linux
+    runs-on: ubuntu-latest
     name: comment bors r+
     steps:
       - name: Checkout

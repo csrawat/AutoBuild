@@ -1,4 +1,4 @@
 class test_dto{
-    val x: String = ""
+    val x: String = "w"
     val fae: Int = 4
 }

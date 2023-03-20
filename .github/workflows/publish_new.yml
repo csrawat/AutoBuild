@@ -1,4 +1,4 @@
-name: PUBLISH
+name: PUBLISH NEW
 
 on:
   push:
@@ -9,7 +9,7 @@ jobs:
     if: contains(github.event.labels.*.name, 'PUBLISH')
     runs-on: ubuntu-latest
     steps:
-    - name: Publish
+    - name: Publish New
       run: |
-        echo 'Publish'
+        echo 'Publish New'
       shell: bash

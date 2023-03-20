@@ -1,4 +1,4 @@
-name: PUBLISH NEW
+name: PUBLISH_NEW
 
 on:
   pull_request:

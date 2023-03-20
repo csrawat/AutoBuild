@@ -1,8 +1,9 @@
 name: PUBLISH NEW
 
 on:
-  push:
-    branches: [ master ]
+  pull_request:
+    types:
+      - closed
 
 jobs:
   pre-publish:
@@ -13,7 +14,7 @@ jobs:
         echo 'Pre Publish'
       shell: bash
   publish:
-    if: contains(github.event.labels.*.name, 'PUBLISH')
+    if: ${{ (github.event.pull_request.merged == true) && (contains(github.event.pull_request.labels.*.name, 'PUBLISH')) }}
     runs-on: ubuntu-latest
     steps:
     - name: Publish New

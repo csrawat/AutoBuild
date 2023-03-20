@@ -5,6 +5,13 @@ on:
     branches: [ master ]
 
 jobs:
+  pre-publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Pre Publish
+      run: |
+        echo 'Pre Publish'
+      shell: bash
   publish:
     if: contains(github.event.labels.*.name, 'PUBLISH')
     runs-on: ubuntu-latest

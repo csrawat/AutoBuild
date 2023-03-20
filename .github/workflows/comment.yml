@@ -4,7 +4,7 @@ on:
     types: [ labeled ]
 jobs:
   add-comment:
-    if: github.event.label.name == 'bors r+'
+    if: contains(github.event.pull_request.labels.*.name, 'bors r+')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

@@ -1,0 +1,15 @@
+name: PUBLISH
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  publish:
+    if: contains(github.event.labels.*.name, 'PUBLISH')
+    runs-on: ubuntu-latest
+    steps:
+    - name: Publish
+      run: |
+        echo 'Publish'
+      shell: bash

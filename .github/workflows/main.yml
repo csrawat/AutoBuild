@@ -3,6 +3,9 @@ name: Auto Add Issues to Project
 on:
   issues:
     types: [opened]
+    
+permissions:
+  contents: read
 
 jobs:
   add-to-project:

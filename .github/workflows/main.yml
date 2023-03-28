@@ -11,5 +11,5 @@ jobs:
     steps:
       - uses: actions/add-to-project@v0.4.1
         with:
-          project-url: https://github.com/orgs/nammayatri/projects/1
+          project-url: https://github.com/users/csrawat/projects/1
           github-token: ${{ secrets.GITHUB_TOKEN }}

@@ -23,4 +23,4 @@ jobs:
           git commit -m "commit message"
           git checkout -b "random-1234"
           git push origin random-1234
-          gh pr create -B random-1234 -H master --title 'Merge random-1234 into master' --body 'Created by Github action'
+          gh pr create --base master --title 'Merge random-1234 into master' --body 'Created by Github action'

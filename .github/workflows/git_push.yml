@@ -21,6 +21,4 @@ jobs:
           git config --global user.email "cs215100@gmail.com"
           git add -A
           git commit -m "commit message"
-          git checkout -b "random-1234"
-          git push origin random-1234
-          gh pr create --base master --title 'Merge random-1234 into master' --body 'Created by Github action'
+          git push

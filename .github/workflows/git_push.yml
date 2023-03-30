@@ -15,7 +15,7 @@ jobs:
       
       - name: Commit and push changes
         env:
-          GH_TOKEN: ${{ github.GITHUB_TOKEN_CS }}
+          GH_TOKEN: ${{ github.PUSH_TOKEN }}
         run: |
           git config --global user.name "csrawat"
           git config --global user.email "cs215100@gmail.com"

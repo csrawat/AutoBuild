@@ -14,6 +14,8 @@ jobs:
           sed -i -E "/SNAPSHOT/s/version.*/version '99.99.99-SNAPSHOT'/g" build.gradle
       
       - name: Commit and push changes
+        env:
+          GH_TOKEN: ${{ github.GITHUB_TOKEN_CS }}
         run: |
           git config --global user.name "csrawat"
           git config --global user.email "cs215100@gmail.com"

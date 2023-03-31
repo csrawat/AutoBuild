@@ -17,7 +17,7 @@ jobs:
       run: |
         CHANGELOG=$(cat results.txt)
         printf "$CHANGELOG"
-        echo "$CHANGELOG" >> $GITHUB_ENV
+        echo "CHANGELOG=$CHANGELOG" >> $GITHUB_ENV
       id: version
       shell: bash
       

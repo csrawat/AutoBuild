@@ -1,0 +1,11 @@
++---------------------+----------------+
+|     Module Name     | Latest Version |
++---------------------+----------------+
+|   database-library  |     0.5.00     |
+|     dto-library     |     0.1.50     |
+|      ui-library     |     0.0.17     |
+|      gi-helper      |     0.0.27     |
+| test-report-library |     0.0.14     |
+|    common-library   |     0.2.11     |
+|     api-library     |     0.2.4      |
++---------------------+----------------+

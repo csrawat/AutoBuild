@@ -13,15 +13,18 @@ jobs:
     - uses: actions/checkout@v3
       with:
           fetch-depth: 0
-    - name: Read VERSION file
-      id: getversion
-      run: echo "::set-output name=version::$(cat results.txt)"
+    - name: test changelog
+      uses: mkungla/actions-set-text-output@v1
+      id: get-changekog
+      with:
+        text: $(cat results.txt)
+    - run: echo "${{ steps.get-changekog.outputs.value }}"
       
     - name: Post to a Slack channel
       id: slack
       uses: slackapi/slack-github-action@v1.21.0
       with:
         channel-id: 'C0418TCEH8B'
-        slack-message: "${{ steps.getversion.outputs.version }}\nGitHub build result: ${{ job.status }}\n${{ github.event.head_commit.url }}"
+        slack-message: "${{ steps.get-changekog.outputs.value }}\nGitHub build result: ${{ job.status }}\n${{ github.event.head_commit.url }}"
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
